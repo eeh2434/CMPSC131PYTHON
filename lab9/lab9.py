@@ -1,9 +1,9 @@
-# Author: Yanling Wang yuw17@psu.edu
-# Collaborator:
-# Collaborator:
-# Collaborator:
-# Section: 1
-# Breakout: 1
+# Author: Emily Hamrick eeh5387@psu.edu
+# Collaborator: Sara Preller skp5565@psu.edu
+# Collaborator: Andrew Torri abt5506@psu.edu
+# Collaborator: Faraj Siddique fas5225@psu.edu
+# Section: 3
+# Breakout: 5
 from sys import argv
 def get_words(filename):
   """
@@ -23,7 +23,14 @@ def invert_dict(d):
   d whose values are equal to v.
   Return the inverted dictionary mapping value to set of keys
   """
-  return {1:1} 
+  dinvert = dict()
+  for key in d:
+    newk = d[key]
+    if(newk not in dinvert):
+      dinvert[newk] = {key}
+    else:
+      dinvert[newk].add(key)
+  return dinvert
 
 def histogram(words):
   """
@@ -32,14 +39,21 @@ def histogram(words):
   words in the list are of that length.
   Return the histogram dictionary mapping length to word counts
   """
-  return {1:1} 
+  histo = dict()
+  for w in words:
+    if(len(w) not in histo):
+      histo[len(w)] = 1
+    else:
+      histo[len(w)] += 1
+  return histo 
 
 def max_kv(d):
   """
   Given a dictionary, return a tuple of key value pair where the key
   is the largest in d.
   """
-  return (1, {1}) 
+  maxk = max(d)
+  return maxk, d[maxk]
 
 def run():
   """
@@ -51,10 +65,10 @@ def run():
   """
   words = get_words(argv[1])
   # fill in code here
-
-
+  histow = histogram(words)
+  inverseh = invert_dict(histow)
   # modify the line below so that count, length_set has the right values
-  count, length_set = 1, {1} 
+  count, length_set = max_kv(inverseh)
   print(f"These word length {length_set} each has {count} words.") 
 
 if __name__ == "__main__":

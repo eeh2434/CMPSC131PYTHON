@@ -1,9 +1,8 @@
-# Author: Yanling Wang yuw17@psu.edu
-# Collaborator:
-# Collaborator:
-# Collaborator:
-# Section: 1
-# Breakout: 1
+# Author: Emily Hamrick eeh5387@psu.edu
+# Collaborator: Matthew Beatty mrb6319@psu.edu
+# Collaborator: Gavin Swartz ges5337@psu.edu
+# Section: 3
+# Breakout: 5
 
 import time
 
@@ -16,7 +15,23 @@ def binary_search_rec(x, t, start, end):
   Your algorithm should be logarithmic to number of elements between [start, end]
   regardless of how many duplicates of x is.
   """
-  return 0
+  if(start>end):
+    return -1
+  mid = (start+end)//2 
+  if(x <= t[mid]):
+    if(start == end):
+      if(t[start] != x):
+        return -1
+      return mid
+    return binary_search_rec(x, t, start, mid)
+  elif(x > t[mid]):
+    if(start == end):
+      if(t[start] != x):
+        return -1
+      return mid
+    return binary_search_rec(x, t, mid+1, end)
+  else:
+   return -1
 
 def binary_search_loop(x, t, start, end):
   """
@@ -27,7 +42,23 @@ def binary_search_loop(x, t, start, end):
   Your algorithm should be logarithmic to number of elements between [start, end]
   regardless of how many duplicates of x is.
   """
-  return 0
+  if(start>end):
+    return -1
+  while(start != end):
+    mid = (start+end)//2
+    if(x <= t[mid]):
+      end = mid
+      if(start == end):
+        if(t[start] != x):
+          return -1
+        return start
+    else:
+      start = mid+1
+      if(start == end):
+        if(t[start] != x):
+          return -1
+        return start
+
 
 def run():
   t1 = [10, 20, 30, 30, 30, 40, 50]
