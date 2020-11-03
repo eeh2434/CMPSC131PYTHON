@@ -38,7 +38,16 @@ def run():
   list_to_dictionary() function and print out the results of the function
   calls.
   """
-  return
+  values = []
+  string = input("Enter a string: ")
+  while(string != "done"):
+    values.append(string)
+    string = input("Enter a string: ")
+  sortedv = remove_duplicate_sorted(values)
+  dictv = list_to_dictionary(values)
+  print(f"List: {values}" )
+  print(f"Sorted List: {sortedv}")
+  print(f"Dict: {dictv}")
 
 if __name__ == "__main__":
   run()
