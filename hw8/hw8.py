@@ -57,7 +57,11 @@ def get_misspelled_linear(dictionary, text):
   if dictionary has N words and text has K words, then the running time for this
   method will be O(NK)
   """
-  return [] 
+  incorrect = []
+  for w in text:
+    if(w.lower() not in dictionary):
+      incorrect.append(w)
+  return incorrect
 
 def get_misspelled_binary(dictionary, text):
   """
@@ -74,7 +78,20 @@ def get_misspelled_binary(dictionary, text):
   if dictionary has N words and text has K words, then the running time for this
   method will be O(K*logN)
   """
-  return []
+  incorrect = []
+  for w in text:
+    lowerw = w.lower()
+    left = 0
+    right = len(dictionary)-1
+    while(left != right):
+      mid = (left+right)//2
+      if(lowerw <= dictionary[mid]):
+        right = mid
+      else:
+        left = mid+1
+    if(lowerw != dictionary[left]):
+      incorrect.append(w)
+  return incorrect  
 
 def get_misspelled_set(dictionary, text):
   """
@@ -93,6 +110,7 @@ def get_misspelled_set(dictionary, text):
   of N words to a set, and O(K) is the time it takes to search for K words in
   a set.
   """
+
   return []
 
 def run():

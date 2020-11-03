@@ -1,10 +1,24 @@
-# Author: Yanling Wang yuw17@psu.edu
+# Author: Emily Hamrick eeh5387@psu.edu
 def isValidKey(key):
   """
   Returns True if key is a string that has 26 characters and each of the letter
   'a'/'A'-'z'/'Z' appeared once and only once in either lower case or upper case.
   Returns False otherwise.
   """
+  lkey = key.lower()
+  if(len(lkey) != 26):
+    return False
+  
+  for h in range(0,25):
+    if(key[h].isalpha()):
+      break
+    else:
+      return False
+
+  for i in range(0,23):
+    for j in range(i+1,25):
+      if(lkey[i] == lkey[j]):
+        return False
   return True
 
 def replace(letter, key):
@@ -13,7 +27,21 @@ def replace(letter, key):
   Replace a single letter with its corresponding key, returns letter if it is
   not in the alphabet 'a'-'z' or 'A'-'Z'
   """
-  return letter
+  alphabet = "abcdefghijklmnopqrstuvwxyz"
+  if(letter == " "):
+    return letter
+
+  if(letter.isalpha()):
+    index = alphabet.index(letter.lower())
+    keyletter = key[index]
+    if(letter.isupper()):
+      keyletter = keyletter.upper()
+    else:
+      keyletter = keyletter.lower()
+    return keyletter
+  else:
+    return letter
+
 
 def substitution(plainText, key):
   """
@@ -28,7 +56,12 @@ def substitution(plainText, key):
   3. use ''.join(list_of_letters) to form the final string. Do not use + to do
   string concatenation to form the encrypted string.
   """
-  return plainText
+  encrypted = []
+  for i in range(0,len(plainText)):
+    keyletter = replace(plainText[i], key)
+    encrypted.append(keyletter)
+  newtext = ''.join(encrypted)
+  return newtext
 
 
 def run():
@@ -50,3 +83,4 @@ def run():
 
 if __name__ == "__main__":
   run()
+

@@ -1,9 +1,9 @@
-# Author: Yanling Wang yuw17@psu.edu
-# Collaborator:
-# Collaborator:
-# Collaborator:
-# Section: 1
-# Breakout: 1
+# Author: Emily Hamrick eeh5387@psu.edu
+# Collaborator: Faraj Siddique fas5225@psu.edu
+# Collaborator: Juliana Broadbent jfb5952@psu.edu
+# Collaborator: Jacob Dally jed5801@psu.edu
+# Section: 3
+# Breakout: 12
 
 import time
 import itertools
@@ -21,13 +21,20 @@ def uses_all(word, letters):
   Return True if every letter in letters appeared in word;
   return False otherwise.
   """
+  for c in letters:
+    if c not in word:
+      return False
   return True
 
 def count_words_letters(words, letters):
   """
   Return the number of words in the list that used all letters in letters.
   """
-  return 0
+  count = 0
+  for word in words:
+    if uses_all(word, letters):
+      count += 1
+  return count
 
 def popular_letters(words, n):
   """
@@ -39,7 +46,16 @@ def popular_letters(words, n):
   """
   alphabet = "abcdefghijklmnopqrstuvwxyz"
   combinations = get_letters_combinations(alphabet, n)
-  return combinations[0] 
+
+  largest = combinations[0]
+  occur = count_words_letters(words, largest)
+
+  for combo in combinations[1:]:
+    newoccur = count_words_letters(words, combo)
+    if(newoccur > occur):
+      occur = newoccur
+      largest = combo
+  return largest
   
 def get_words(filename):
   """
