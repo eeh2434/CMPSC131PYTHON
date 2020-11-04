@@ -30,6 +30,11 @@ def is_word_from_letters(word, letters):
   is_word_from_letters("book", "bok") should be False because we do not have
   enough letter 'o'.
   """
+  llist = list(letters)
+  for l in word:
+    if(l not in llist):
+      return False
+    llist.remove(l)
   return True
 
 def get_word_score(word, value_dict):
@@ -38,7 +43,10 @@ def get_word_score(word, value_dict):
   calculates the word's score (adding up each letter's score)
   and return the score.
   """
-  return 0
+  ssum = 0
+  for l in word:
+    ssum += value_dict[l]
+  return ssum
 
 def get_legal_word_scores(letters, dictionary, value_dict):
   """
@@ -51,7 +59,15 @@ def get_legal_word_scores(letters, dictionary, value_dict):
   dictionary made from the given letters and computes to that
   score. The list should be in alphabetical order.
   """
-  return {}
+  viable = dict()
+  for word in dictionary:
+    if(is_word_from_letters(word, letters)):
+      score = get_word_score(word, value_dict)
+      if(score not in viable):
+        viable[score] = [word]
+      else:
+        viable[score].append(word)
+  return viable
 
 def run():
   # Getting list of words from the dictionary
