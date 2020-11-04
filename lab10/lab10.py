@@ -1,7 +1,7 @@
 # Author: Emily Hamrick eeh5387@psu.edu
 # Collaborator: Alex Koretke ajk6357@psu.edu
 # Collaborator: Purushottam Shukla pps5338@psu.edu
-# Collaborator:
+# Collaborator: Marquis McMillan mmm7378@psu.edu
 # Section: 3
 # Breakout: 6
 
@@ -10,8 +10,8 @@ def remove_duplicate_sorted(t):
   this function returns a new list generated from t that has t's
   elements without duplicates and is sorted from smallest to largest.
   """
-  return set(t)
-
+  return sorted(set(t))
+  
 def list_to_dictionary(t):
   """
   t is a list of values (values could be str, list, tuple, set, dictionary),
@@ -25,9 +25,9 @@ def list_to_dictionary(t):
   d = dict()
   for i in t:
     if(len(i) not in d):
-      d[len(i)] = i
+      d[len(i)] = [i]
     else:
-      d[len(i)].add(i)
+      d[len(i)].append(i)
   return d
 
 def run():
